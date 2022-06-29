@@ -1,0 +1,185 @@
+*** Reading remote log from gs://asia-southeast1-cc2-6326d2a6-bucket/logs/example_gcp_gke/ex-pod-affinity/2022-06-29T04:43:26.475882+00:00/3.log.
+[2022-06-29, 04:54:35 UTC] {taskinstance.py:1044} INFO - Dependencies all met for <TaskInstance: example_gcp_gke.ex-pod-affinity manual__2022-06-29T04:43:26.475882+00:00 [queued]>
+[2022-06-29, 04:54:35 UTC] {taskinstance.py:1044} INFO - Dependencies all met for <TaskInstance: example_gcp_gke.ex-pod-affinity manual__2022-06-29T04:43:26.475882+00:00 [queued]>
+[2022-06-29, 04:54:35 UTC] {taskinstance.py:1250} INFO - 
+--------------------------------------------------------------------------------
+[2022-06-29, 04:54:35 UTC] {taskinstance.py:1251} INFO - Starting attempt 3 of 3
+[2022-06-29, 04:54:35 UTC] {taskinstance.py:1252} INFO - 
+--------------------------------------------------------------------------------
+[2022-06-29, 04:54:35 UTC] {taskinstance.py:1271} INFO - Executing <Task(GKEStartPodOperator): ex-pod-affinity> on 2022-06-29 04:43:26.475882+00:00
+[2022-06-29, 04:54:35 UTC] {standard_task_runner.py:52} INFO - Started process 1070 to run task
+[2022-06-29, 04:54:35 UTC] {standard_task_runner.py:79} INFO - Running: ['airflow', 'tasks', 'run', 'example_gcp_gke', 'ex-pod-affinity', 'manual__2022-06-29T04:43:26.475882+00:00', '--job-id', '18', '--raw', '--subdir', 'DAGS_FOLDER/gke_operator.py', '--cfg-path', '/tmp/tmpfqmsl_kw', '--error-file', '/tmp/tmpbu_ahwep']
+[2022-06-29, 04:54:35 UTC] {standard_task_runner.py:80} INFO - Job 18: Subtask ex-pod-affinity
+[2022-06-29, 04:54:36 UTC] {task_command.py:298} INFO - Running <TaskInstance: example_gcp_gke.ex-pod-affinity manual__2022-06-29T04:43:26.475882+00:00 [running]> on host airflow-worker-fdlbb
+[2022-06-29, 04:54:36 UTC] {taskinstance.py:1448} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=example_gcp_gke
+AIRFLOW_CTX_TASK_ID=ex-pod-affinity
+AIRFLOW_CTX_EXECUTION_DATE=2022-06-29T04:43:26.475882+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2022-06-29T04:43:26.475882+00:00
+[2022-06-29, 04:54:36 UTC] {credentials_provider.py:324} INFO - Getting connection using `google.auth.default()` since no key file is defined for hook.
+[2022-06-29, 04:54:40 UTC] {process_utils.py:160} INFO - Executing cmd: gcloud container clusters get-credentials asia-southeast1-cc2-6326d2a6-gke --project central-cto-ofm-data-hub-dev --zone asia-southeast1
+[2022-06-29, 04:54:41 UTC] {process_utils.py:164} INFO - Output:
+[2022-06-29, 04:54:43 UTC] {process_utils.py:168} INFO - Fetching cluster endpoint and auth data.
+[2022-06-29, 04:54:43 UTC] {process_utils.py:168} INFO - kubeconfig entry generated for asia-southeast1-cc2-6326d2a6-gke.
+[2022-06-29, 04:54:44 UTC] {kubernetes_pod.py:566} INFO - Creating pod ex-pod-affinity.27bddfc464d9473fbe57ffd94aa58007 with labels: {'dag_id': 'example_gcp_gke', 'task_id': 'ex-pod-affinity', 'execution_date': '2022-06-29T044326.4758820000-5d0daf090', 'try_number': '3'}
+[2022-06-29, 04:54:48 UTC] {pod_manager.py:116} ERROR - Exception when attempting to create Namespaced Pod: {   "apiVersion": "v1",   "kind": "Pod",   "metadata": {     "annotations": {},     "labels": {       "dag_id": "example_gcp_gke",       "task_id": "ex-pod-affinity",       "execution_date": "2022-06-29T044326.4758820000-5d0daf090",       "try_number": "3",       "airflow_version": "2.2.5-composer",       "kubernetes_pod_operator": "True"     },     "name": "ex-pod-affinity.27bddfc464d9473fbe57ffd94aa58007",     "namespace": "default"   },   "spec": {     "affinity": {       "nodeAffinity": {         "requiredDuringSchedulingIgnoredDuringExecution": {           "nodeSelectorTerms": [             {               "matchExpressions": [                 {                   "key": "cloud.google.com/gke-nodepool",                   "operator": "In",                   "values": [                     "pool-1"                   ]                 }               ]             }           ]         }       }     },     "containers": [       {         "args": [           "-Mbignum=bpi",           "-wle",           "print bpi(2000)"         ],         "command": [           "perl"         ],         "env": [],         "envFrom": [],         "image": "perl",         "name": "base",         "ports": [],         "resources": {},         "volumeMounts": []       }     ],     "hostNetwork": false,     "imagePullSecrets": [],     "initContainers": [],     "nodeSelector": {},     "restartPolicy": "Never",     "securityContext": {},     "tolerations": [],     "volumes": []   } }
+Traceback (most recent call last):
+  File "/opt/python3.8/lib/python3.8/site-packages/airflow/providers/cncf/kubernetes/utils/pod_manager.py", line 111, in run_pod_async
+    resp = self._client.create_namespaced_pod(
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api/core_v1_api.py", line 6174, in create_namespaced_pod
+    (data) = self.create_namespaced_pod_with_http_info(namespace, body, **kwargs)  # noqa: E501
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api/core_v1_api.py", line 6251, in create_namespaced_pod_with_http_info
+    return self.api_client.call_api(
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api_client.py", line 340, in call_api
+    return self.__call_api(resource_path, method,
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api_client.py", line 172, in __call_api
+    response_data = self.request(
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api_client.py", line 382, in request
+    return self.rest_client.POST(url,
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/rest.py", line 272, in POST
+    return self.request("POST", url,
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/rest.py", line 231, in request
+    raise ApiException(http_resp=r)
+kubernetes.client.rest.ApiException: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Audit-Id': '7d7319f4-25d3-4e9a-81c9-d1b65eda463b', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'Warning': '299 - "Autopilot set default resource requests for Pod default/ex-pod-affinity.27bddfc464d9473fbe57ffd94aa58007, as resource requests were not specified. See http://g.co/gke/autopilot-defaults."', 'X-Kubernetes-Pf-Flowschema-Uid': '06fc804b-61bf-4dd5-a6ba-cd91d1fc0702', 'X-Kubernetes-Pf-Prioritylevel-Uid': '0d4c1b0a-2a91-4621-b61c-a514e26fffbe', 'Date': 'Wed, 29 Jun 2022 04:54:48 GMT', 'Content-Length': '946'})
+HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"admission webhook \"gkepolicy.common-webhooks.networking.gke.io\" denied the request: GKE Warden rejected the request because it violates one or more policies: {\"[denied by autogke-node-affinity-selector-limitation]\":[\"If not using workload separation, node affinity is not allowed on labels with keys: 'cloud.google.com/gke-nodepool'; Autopilot only allows labels with keys: 'cloud.google.com/compute-class,cloud.google.com/gke-spot,topology.kubernetes.io/region,topology.kubernetes.io/zone,failure-domain.beta.kubernetes.io/region,failure-domain.beta.kubernetes.io/zone,cloud.google.com/gke-os-distribution,kubernetes.io/os,kubernetes.io/arch,cloud.google.com/private-node'. Requested by user: '541696535528-compute@developer.gserviceaccount.com', groups: 'system:authenticated'.\"]}","reason":"[denied by autogke-node-affinity-selector-limitation]","code":400}
+
+
+[2022-06-29, 04:54:48 UTC] {kubernetes_pod.py:612} ERROR - (404)
+Reason: Not Found
+HTTP response headers: HTTPHeaderDict({'Audit-Id': 'fc5d3819-c59e-4ad0-a5bc-cfa41f4678e9', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'X-Kubernetes-Pf-Flowschema-Uid': '06fc804b-61bf-4dd5-a6ba-cd91d1fc0702', 'X-Kubernetes-Pf-Prioritylevel-Uid': '0d4c1b0a-2a91-4621-b61c-a514e26fffbe', 'Date': 'Wed, 29 Jun 2022 04:54:48 GMT', 'Content-Length': '264'})
+HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"pods \"ex-pod-affinity.27bddfc464d9473fbe57ffd94aa58007\" not found","reason":"NotFound","details":{"name":"ex-pod-affinity.27bddfc464d9473fbe57ffd94aa58007","kind":"pods"},"code":404}
+
+Traceback (most recent call last):
+  File "/opt/python3.8/lib/python3.8/site-packages/airflow/providers/cncf/kubernetes/operators/kubernetes_pod.py", line 410, in execute
+    self.pod = self.get_or_create_pod(  # must set `self.pod` for `on_kill`
+  File "/opt/python3.8/lib/python3.8/site-packages/airflow/providers/cncf/kubernetes/operators/kubernetes_pod.py", line 388, in get_or_create_pod
+    self.pod_manager.create_pod(pod=pod_request_obj)
+  File "/opt/python3.8/lib/python3.8/site-packages/tenacity/__init__.py", line 324, in wrapped_f
+    return self(f, *args, **kw)
+  File "/opt/python3.8/lib/python3.8/site-packages/tenacity/__init__.py", line 404, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "/opt/python3.8/lib/python3.8/site-packages/tenacity/__init__.py", line 349, in iter
+    return fut.result()
+  File "/opt/python3.8/lib/python3.8/concurrent/futures/_base.py", line 437, in result
+    return self.__get_result()
+  File "/opt/python3.8/lib/python3.8/concurrent/futures/_base.py", line 389, in __get_result
+    raise self._exception
+  File "/opt/python3.8/lib/python3.8/site-packages/tenacity/__init__.py", line 407, in __call__
+    result = fn(*args, **kwargs)
+  File "/opt/python3.8/lib/python3.8/site-packages/airflow/providers/cncf/kubernetes/utils/pod_manager.py", line 141, in create_pod
+    return self.run_pod_async(pod)
+  File "/opt/python3.8/lib/python3.8/site-packages/airflow/providers/cncf/kubernetes/utils/pod_manager.py", line 119, in run_pod_async
+    raise e
+  File "/opt/python3.8/lib/python3.8/site-packages/airflow/providers/cncf/kubernetes/utils/pod_manager.py", line 111, in run_pod_async
+    resp = self._client.create_namespaced_pod(
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api/core_v1_api.py", line 6174, in create_namespaced_pod
+    (data) = self.create_namespaced_pod_with_http_info(namespace, body, **kwargs)  # noqa: E501
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api/core_v1_api.py", line 6251, in create_namespaced_pod_with_http_info
+    return self.api_client.call_api(
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api_client.py", line 340, in call_api
+    return self.__call_api(resource_path, method,
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api_client.py", line 172, in __call_api
+    response_data = self.request(
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api_client.py", line 382, in request
+    return self.rest_client.POST(url,
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/rest.py", line 272, in POST
+    return self.request("POST", url,
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/rest.py", line 231, in request
+    raise ApiException(http_resp=r)
+kubernetes.client.rest.ApiException: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Audit-Id': '7d7319f4-25d3-4e9a-81c9-d1b65eda463b', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'Warning': '299 - "Autopilot set default resource requests for Pod default/ex-pod-affinity.27bddfc464d9473fbe57ffd94aa58007, as resource requests were not specified. See http://g.co/gke/autopilot-defaults."', 'X-Kubernetes-Pf-Flowschema-Uid': '06fc804b-61bf-4dd5-a6ba-cd91d1fc0702', 'X-Kubernetes-Pf-Prioritylevel-Uid': '0d4c1b0a-2a91-4621-b61c-a514e26fffbe', 'Date': 'Wed, 29 Jun 2022 04:54:48 GMT', 'Content-Length': '946'})
+HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"admission webhook \"gkepolicy.common-webhooks.networking.gke.io\" denied the request: GKE Warden rejected the request because it violates one or more policies: {\"[denied by autogke-node-affinity-selector-limitation]\":[\"If not using workload separation, node affinity is not allowed on labels with keys: 'cloud.google.com/gke-nodepool'; Autopilot only allows labels with keys: 'cloud.google.com/compute-class,cloud.google.com/gke-spot,topology.kubernetes.io/region,topology.kubernetes.io/zone,failure-domain.beta.kubernetes.io/region,failure-domain.beta.kubernetes.io/zone,cloud.google.com/gke-os-distribution,kubernetes.io/os,kubernetes.io/arch,cloud.google.com/private-node'. Requested by user: '541696535528-compute@developer.gserviceaccount.com', groups: 'system:authenticated'.\"]}","reason":"[denied by autogke-node-affinity-selector-limitation]","code":400}
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/python3.8/lib/python3.8/site-packages/airflow/providers/cncf/kubernetes/operators/kubernetes_pod.py", line 449, in cleanup
+    self.patch_already_checked(pod)
+  File "/opt/python3.8/lib/python3.8/site-packages/airflow/providers/cncf/kubernetes/operators/kubernetes_pod.py", line 482, in patch_already_checked
+    self.client.patch_namespaced_pod(pod.metadata.name, pod.metadata.namespace, body)
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api/core_v1_api.py", line 16004, in patch_namespaced_pod
+    (data) = self.patch_namespaced_pod_with_http_info(name, namespace, body, **kwargs)  # noqa: E501
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api/core_v1_api.py", line 16095, in patch_namespaced_pod_with_http_info
+    return self.api_client.call_api(
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api_client.py", line 340, in call_api
+    return self.__call_api(resource_path, method,
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api_client.py", line 172, in __call_api
+    response_data = self.request(
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api_client.py", line 398, in request
+    return self.rest_client.PATCH(url,
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/rest.py", line 292, in PATCH
+    return self.request("PATCH", url,
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/rest.py", line 231, in request
+    raise ApiException(http_resp=r)
+kubernetes.client.rest.ApiException: (404)
+Reason: Not Found
+HTTP response headers: HTTPHeaderDict({'Audit-Id': 'fc5d3819-c59e-4ad0-a5bc-cfa41f4678e9', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'X-Kubernetes-Pf-Flowschema-Uid': '06fc804b-61bf-4dd5-a6ba-cd91d1fc0702', 'X-Kubernetes-Pf-Prioritylevel-Uid': '0d4c1b0a-2a91-4621-b61c-a514e26fffbe', 'Date': 'Wed, 29 Jun 2022 04:54:48 GMT', 'Content-Length': '264'})
+HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"pods \"ex-pod-affinity.27bddfc464d9473fbe57ffd94aa58007\" not found","reason":"NotFound","details":{"name":"ex-pod-affinity.27bddfc464d9473fbe57ffd94aa58007","kind":"pods"},"code":404}
+
+
+[2022-06-29, 04:54:48 UTC] {kubernetes_pod.py:462} INFO - skipping deleting pod: ex-pod-affinity.27bddfc464d9473fbe57ffd94aa58007
+[2022-06-29, 04:54:48 UTC] {taskinstance.py:1776} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/python3.8/lib/python3.8/site-packages/airflow/providers/cncf/kubernetes/operators/kubernetes_pod.py", line 410, in execute
+    self.pod = self.get_or_create_pod(  # must set `self.pod` for `on_kill`
+  File "/opt/python3.8/lib/python3.8/site-packages/airflow/providers/cncf/kubernetes/operators/kubernetes_pod.py", line 388, in get_or_create_pod
+    self.pod_manager.create_pod(pod=pod_request_obj)
+  File "/opt/python3.8/lib/python3.8/site-packages/tenacity/__init__.py", line 324, in wrapped_f
+    return self(f, *args, **kw)
+  File "/opt/python3.8/lib/python3.8/site-packages/tenacity/__init__.py", line 404, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "/opt/python3.8/lib/python3.8/site-packages/tenacity/__init__.py", line 349, in iter
+    return fut.result()
+  File "/opt/python3.8/lib/python3.8/concurrent/futures/_base.py", line 437, in result
+    return self.__get_result()
+  File "/opt/python3.8/lib/python3.8/concurrent/futures/_base.py", line 389, in __get_result
+    raise self._exception
+  File "/opt/python3.8/lib/python3.8/site-packages/tenacity/__init__.py", line 407, in __call__
+    result = fn(*args, **kwargs)
+  File "/opt/python3.8/lib/python3.8/site-packages/airflow/providers/cncf/kubernetes/utils/pod_manager.py", line 141, in create_pod
+    return self.run_pod_async(pod)
+  File "/opt/python3.8/lib/python3.8/site-packages/airflow/providers/cncf/kubernetes/utils/pod_manager.py", line 119, in run_pod_async
+    raise e
+  File "/opt/python3.8/lib/python3.8/site-packages/airflow/providers/cncf/kubernetes/utils/pod_manager.py", line 111, in run_pod_async
+    resp = self._client.create_namespaced_pod(
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api/core_v1_api.py", line 6174, in create_namespaced_pod
+    (data) = self.create_namespaced_pod_with_http_info(namespace, body, **kwargs)  # noqa: E501
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api/core_v1_api.py", line 6251, in create_namespaced_pod_with_http_info
+    return self.api_client.call_api(
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api_client.py", line 340, in call_api
+    return self.__call_api(resource_path, method,
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api_client.py", line 172, in __call_api
+    response_data = self.request(
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/api_client.py", line 382, in request
+    return self.rest_client.POST(url,
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/rest.py", line 272, in POST
+    return self.request("POST", url,
+  File "/opt/python3.8/lib/python3.8/site-packages/kubernetes/client/rest.py", line 231, in request
+    raise ApiException(http_resp=r)
+kubernetes.client.rest.ApiException: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Audit-Id': '7d7319f4-25d3-4e9a-81c9-d1b65eda463b', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'Warning': '299 - "Autopilot set default resource requests for Pod default/ex-pod-affinity.27bddfc464d9473fbe57ffd94aa58007, as resource requests were not specified. See http://g.co/gke/autopilot-defaults."', 'X-Kubernetes-Pf-Flowschema-Uid': '06fc804b-61bf-4dd5-a6ba-cd91d1fc0702', 'X-Kubernetes-Pf-Prioritylevel-Uid': '0d4c1b0a-2a91-4621-b61c-a514e26fffbe', 'Date': 'Wed, 29 Jun 2022 04:54:48 GMT', 'Content-Length': '946'})
+HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"admission webhook \"gkepolicy.common-webhooks.networking.gke.io\" denied the request: GKE Warden rejected the request because it violates one or more policies: {\"[denied by autogke-node-affinity-selector-limitation]\":[\"If not using workload separation, node affinity is not allowed on labels with keys: 'cloud.google.com/gke-nodepool'; Autopilot only allows labels with keys: 'cloud.google.com/compute-class,cloud.google.com/gke-spot,topology.kubernetes.io/region,topology.kubernetes.io/zone,failure-domain.beta.kubernetes.io/region,failure-domain.beta.kubernetes.io/zone,cloud.google.com/gke-os-distribution,kubernetes.io/os,kubernetes.io/arch,cloud.google.com/private-node'. Requested by user: '541696535528-compute@developer.gserviceaccount.com', groups: 'system:authenticated'.\"]}","reason":"[denied by autogke-node-affinity-selector-limitation]","code":400}
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/python3.8/lib/python3.8/site-packages/airflow/providers/google/cloud/operators/kubernetes_engine.py", line 422, in execute
+    return super().execute(context)
+  File "/opt/python3.8/lib/python3.8/site-packages/airflow/providers/cncf/kubernetes/operators/kubernetes_pod.py", line 430, in execute
+    self.cleanup(
+  File "/opt/python3.8/lib/python3.8/site-packages/airflow/providers/cncf/kubernetes/operators/kubernetes_pod.py", line 452, in cleanup
+    raise AirflowException(f'Pod {pod and pod.metadata.name} returned a failure: {remote_pod}')
+airflow.exceptions.AirflowException: Pod ex-pod-affinity.27bddfc464d9473fbe57ffd94aa58007 returned a failure: None
+[2022-06-29, 04:54:48 UTC] {taskinstance.py:1279} INFO - Marking task as FAILED. dag_id=example_gcp_gke, task_id=ex-pod-affinity, execution_date=20220629T044326, start_date=20220629T045435, end_date=20220629T045448
+[2022-06-29, 04:54:48 UTC] {standard_task_runner.py:93} ERROR - Failed to execute job 18 for task ex-pod-affinity (Pod ex-pod-affinity.27bddfc464d9473fbe57ffd94aa58007 returned a failure: None; 1070)
+[2022-06-29, 04:54:48 UTC] {local_task_job.py:154} INFO - Task exited with return code 1
+[2022-06-29, 04:54:48 UTC] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
